@@ -23,7 +23,7 @@ jobs:
         python-version: 3.8
 
     - name: setup-dvc
-    - uses: iterative/setup-dvc@v1
+      uses: iterative/setup-dvc@v1
 
     - name: Install dependencies
       run: |
