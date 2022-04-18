@@ -21,7 +21,7 @@ def test_example():
 
 def test_correct_import(read_data):
 	'''
-	Ensures that the correct data is imported 
+	Ensures that the correct data is imported
 	'''
 
 	assert read_data.shape[0] == 32561
