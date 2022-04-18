@@ -24,4 +24,4 @@ def test_correct_partition(data):
 	Ensures that the correct data is imported
 	'''
 
-	assert data.shape[0] = 32561
+	assert data.shape[0] == 32561
