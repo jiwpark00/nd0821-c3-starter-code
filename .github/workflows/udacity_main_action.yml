@@ -44,5 +44,5 @@ jobs:
 
     - uses: iterative/setup-dvc@v1
 
-    - name: Pulling latest from dvc
+    - name: Pulling latest from dvc with this command
       run: dvc pull
