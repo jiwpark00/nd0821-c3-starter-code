@@ -46,3 +46,7 @@ jobs:
 
     - name: Pulling latest from dvc with this command
       run: dvc pull
+
+    - name: Test with pytest
+      run: |
+        pytest
