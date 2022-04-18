@@ -58,7 +58,6 @@ def process_data(
         lb = LabelBinarizer()
         X_categorical = encoder.fit_transform(X_categorical)
         y = lb.fit_transform(y.values).ravel()
-        print(X[0:5],y[0:5])
     else:
         X_categorical = encoder.transform(X_categorical)
         try:

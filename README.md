@@ -1,3 +1,6 @@
+# Repository Details
+This project creates XGBoost model (binary classifier) to predict whether or not the salary is above or below $50K. 1 refers to above 50K.
+
 Working in a command line environment is recommended for ease of use with git and dvc. If on Windows, WSL1 or 2 is recommended.
 
 # Environment Set up

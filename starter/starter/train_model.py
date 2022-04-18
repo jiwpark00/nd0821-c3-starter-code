@@ -40,6 +40,8 @@ X_test, y_test, encoder, lb = process_data(
 # Train XGBoost Model
 model = train_model(X_train, y_train)
 
-y_pred = xgb.predict(X_test)
+y_pred = model.predict(X_test)
+print(y_pred.shape[0])
 
-# Train and save a model.
+# Save y_pred to make sure that file was scored with the right dataset
+pd.DataFrame(y_pred).to_csv('../data/y_pred_xgb.csv',index=False)
