@@ -6,9 +6,22 @@ Created: 4/18/2022
 '''
 
 import pytest
+import pandas as pd
+
+@pytest.fixture(scope="session")
+def read_data():
+	data = pd.read_csv('../data/clean_census.csv')
+	return data
 
 def test_example():
 	'''
 	Test function included to pass the Github Actions
 	'''
 	pass
+
+def test_correct_partition(data):
+	'''
+	Ensures that the correct data is imported
+	'''
+
+	assert data.shape[0] = 32561
