@@ -4,9 +4,11 @@ from sklearn.model_selection import train_test_split
 import numpy as np
 import pandas as pd
 from sklearn.preprocessing import LabelBinarizer, OneHotEncoder
+from xgboost import XGBClassifier
 
 # Add the necessary imports for the starter code.
 from ml.data import process_data
+from ml.model import train_model, compute_model_metrics, inference
 
 # Add code to load in the data.
 
@@ -26,12 +28,18 @@ cat_features = [
     "native-country",
 ]
 
-# I commented below to test out Github Actions
 X_train, y_train, encoder, lb = process_data(
     train, categorical_features=cat_features, label="salary", training=True
 )
 
-print(X_train.shape)
-# Proces the test data with the process_data function.
+# Process the test data with the process_data function.
+X_test, y_test, encoder, lb = process_data(
+    test, categorical_features=cat_features, label="salary", training=False, encoder=encoder, lb=lb
+)
+
+# Train XGBoost Model
+model = train_model(X_train, y_train)
+
+y_pred = xgb.predict(X_test)
 
 # Train and save a model.
