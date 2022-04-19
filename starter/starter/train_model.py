@@ -77,7 +77,7 @@ for col in cat_features:
 		y_pred_sub = y_pred[categ_ind]
 		slice_based_output.append( ((col + "_" + categ), compute_model_metrics(y_test_sub, y_pred_sub)) )
 
-pd.DataFrame(slice_based_output).to_csv('../data/slice_based_output_metrics.csv',index=False)
+pd.DataFrame(slice_based_output).to_csv('../data/slice_output.txt',index=False)
 
 # Model dumps
 joblib.dump(model, '../model/final_xgb.pkl')
