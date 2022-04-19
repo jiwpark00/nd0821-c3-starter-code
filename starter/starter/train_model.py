@@ -5,6 +5,7 @@ import numpy as np
 import pandas as pd
 from sklearn.preprocessing import LabelBinarizer, OneHotEncoder
 from xgboost import XGBClassifier
+import joblib
 
 # Add the necessary imports for the starter code.
 from ml.data import process_data
@@ -28,6 +29,8 @@ cat_features = [
     "native-country",
 ]
 
+train.to_csv('../data/train.csv',index=False)
+
 X_train, y_train, encoder, lb = process_data(
     train, categorical_features=cat_features, label="salary", training=True
 )
@@ -40,10 +43,13 @@ X_test, y_test, encoder, lb = process_data(
     test, categorical_features=cat_features, label="salary", training=False, encoder=encoder, lb=lb
 )
 
+# Save this to X_test first 100 rows for inference
+pd.DataFrame(X_test).iloc[0:100].to_csv('../data/first_100_test_inputs.csv',index=False)
+
 # Train XGBoost Model
 model = train_model(X_train, y_train)
 
-y_pred = model.predict(X_test)
+y_pred = inference(model,X_test)
 
 # Save y_pred to make sure that file was scored with the right dataset
 pd.DataFrame(y_pred).to_csv('../data/y_pred_xgb.csv',index=False)
@@ -66,3 +72,5 @@ for col in cat_features:
 		slice_based_output.append( ((col + "_" + categ), compute_model_metrics(y_test_sub, y_pred_sub)) )
 
 pd.DataFrame(slice_based_output).to_csv('../data/slice_based_output_metrics.csv',index=False)
+
+joblib.dump(model, '../model/final_xgb.pkl')
