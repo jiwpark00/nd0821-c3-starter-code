@@ -23,7 +23,10 @@ cat_features = [
     "native_country",
 ]
 
-# os.chdir('..')
+# Due to integration with pytest and local, if we are running on local
+# This would execute to push "up" the directory one level
+if 'starter' in os.getcwd():
+	os.chdir('..')
 
 # Imports the model
 score_data = pd.read_csv('starter/data/first_100_test_inputs.csv')
