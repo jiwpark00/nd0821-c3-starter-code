@@ -1,0 +1,23 @@
+curl -X 'POST' \
+  'http://127.0.0.1:8000/predict_dynamic' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "value": {
+   "age": 31,
+   "workclass": " Private",
+   "fnlgt": 132996,
+   "education": " HS-grad",
+   "education-num": 9,
+   "marital-status": " Married-civ-spouse",
+   "occupation": " Prof-specialty",
+   "relationship": " Husband",
+   "race": " White",
+   "sex": " Male",
+   "capital-gain": 5178,
+   "capital-loss": 0,
+   "hours-per-week": 45,
+   "native-country": " United-States",
+   "salary": " >50K"
+ }
+}'

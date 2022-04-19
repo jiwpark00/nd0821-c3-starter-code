@@ -4,11 +4,27 @@ from pydantic import BaseModel
 import joblib
 import pandas as pd
 import numpy as np
+from starter.ml.data import process_data
 
 app = FastAPI()
 
+class Value(BaseModel):
+    value: dict
+
+cat_features = [
+    "workclass",
+    "education",
+    "marital_status",
+    "occupation",
+    "relationship",
+    "race",
+    "sex",
+    "native_country",
+]
+
 # Imports the model
 score_data = pd.read_csv('data/first_100_test_inputs.csv')
+train_data = pd.read_csv('data/train.csv')
 
 xgb = joblib.load("model/final_xgb.pkl")
 
@@ -16,7 +32,42 @@ xgb = joblib.load("model/final_xgb.pkl")
 def welcome():
 	return {"Hello World, ": "Welcome!"}
 
-@app.get("/predict")
+@app.get("/predict_static")
 def return_prediction():
+	'''
+	Sample model output for testing
+	'''
+
 	print(xgb.predict(score_data.iloc[0:1]))
+	print(score_data.shape)
 	return {'Hi': score_data.shape}
+
+@app.post("/predict_dynamic")
+def predict(body: Value):
+	body_dict = body.dict()
+	body_dict_vals = body_dict['value']
+
+	body_dict_vals_fixed = {}
+
+	for k,v in body_dict_vals.items():
+		if '-' in k:
+			body_dict_vals_fixed[k.replace('-','_')] = v
+		else:
+			body_dict_vals_fixed[k] = v
+
+	# Due to index issue
+	fixed_body = {k:[v] for k,v in body_dict_vals_fixed.items()}  # WORKAROUND
+	fixed_body_df = pd.DataFrame(fixed_body)
+
+	# This is inefficient but lets us to re-use encoder and lb
+	X_train, y_train, encoder, lb = process_data(
+    train_data, categorical_features=cat_features, label="salary", training=True
+)
+
+	fixed_body_processed, y_test, encoder, lb = process_data(
+    fixed_body_df, categorical_features=cat_features, label=None, training=False, encoder=encoder, lb=lb
+)
+	print(pd.DataFrame(fixed_body_processed))
+	#fixed_body_scores = xgb.predict(pd.DataFrame(fixed_body_processed))
+	
+	return {"Score": 2}
