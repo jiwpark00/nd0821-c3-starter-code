@@ -8,12 +8,13 @@ Created: 4/19/2022
 from fastapi.testclient import TestClient
 from main import app
 
+client = TestClient(app)
+
+
 def test_sample():
 	pass
 
-# client = TestClient(app)
-
-# def test_get_home():
-# 	r = client.get("/")
-# 	assert r.status_code == 200
-# 	assert r.json() == {"Hello World, ": "Welcome!"}
+def test_get_home():
+	r = client.get("/")
+	assert r.status_code == 200
+	assert r.json() == {"Hello World, ": "Welcome!"}
