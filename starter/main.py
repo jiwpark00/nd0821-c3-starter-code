@@ -23,7 +23,7 @@ cat_features = [
     "native_country",
 ]
 
-os.chdir('/Users/jiwoongpark/Documents/assignment3/final_assignment/nd0821-c3-starter-code/')
+os.chdir('..')
 
 # Imports the model
 score_data = pd.read_csv('starter/data/first_100_test_inputs.csv')
