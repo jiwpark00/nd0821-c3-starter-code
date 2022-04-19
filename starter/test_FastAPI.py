@@ -6,7 +6,7 @@ Created: 4/19/2022
 '''
 
 from fastapi.testclient import TestClient
-from main import app
+# from main import app
 
 def test_sample():
 	pass
