@@ -32,6 +32,9 @@ X_train, y_train, encoder, lb = process_data(
     train, categorical_features=cat_features, label="salary", training=True
 )
 
+# To do the slice, we need to reset the test index
+test.reset_index(drop=True,inplace=True)
+
 # Process the test data with the process_data function.
 X_test, y_test, encoder, lb = process_data(
     test, categorical_features=cat_features, label="salary", training=False, encoder=encoder, lb=lb
@@ -41,7 +44,25 @@ X_test, y_test, encoder, lb = process_data(
 model = train_model(X_train, y_train)
 
 y_pred = model.predict(X_test)
-print(y_pred.shape[0])
 
 # Save y_pred to make sure that file was scored with the right dataset
 pd.DataFrame(y_pred).to_csv('../data/y_pred_xgb.csv',index=False)
+
+# Total precision, recall, fbeta
+precision, recall, fbeta = compute_model_metrics(y_test, y_pred)
+
+# Model evaluation on the test dataset
+slice_based_output = [('columnName_sliceName'), ("precisionVal, recallVal, fbetaVal")]
+
+slice_based_output.append( (("Total_NoSlice"), precision, recall, fbeta) )
+
+for col in cat_features:
+	# define categories
+	col_categ = np.unique(test[col].values)
+	for categ in col_categ:
+		categ_ind = test[test[col] == categ].index
+		y_test_sub = y_test[categ_ind]
+		y_pred_sub = y_pred[categ_ind]
+		slice_based_output.append( ((col + "_" + categ), compute_model_metrics(y_test_sub, y_pred_sub)) )
+
+pd.DataFrame(slice_based_output).to_csv('../data/slice_based_output_metrics.csv',index=False)
