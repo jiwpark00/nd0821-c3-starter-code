@@ -23,13 +23,13 @@ cat_features = [
     "native_country",
 ]
 
-print(os.getwd())
+os.chdir('/Users/jiwoongpark/Documents/assignment3/final_assignment/nd0821-c3-starter-code/')
 
 # Imports the model
-score_data = pd.read_csv('data/first_100_test_inputs.csv')
-train_data = pd.read_csv('data/train.csv')
+score_data = pd.read_csv('starter/data/first_100_test_inputs.csv')
+train_data = pd.read_csv('starter/data/train.csv')
 
-xgb = joblib.load("model/final_xgb.pkl")
+xgb = joblib.load("starter/model/final_xgb.pkl")
 
 @app.get("/")
 def welcome():
