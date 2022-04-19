@@ -4,6 +4,7 @@ from pydantic import BaseModel
 import joblib
 import pandas as pd
 import numpy as np
+import os
 from starter.ml.data import process_data
 
 app = FastAPI()
@@ -21,6 +22,8 @@ cat_features = [
     "sex",
     "native_country",
 ]
+
+print(os.getwd())
 
 # Imports the model
 score_data = pd.read_csv('data/first_100_test_inputs.csv')
