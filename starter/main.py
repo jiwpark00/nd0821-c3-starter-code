@@ -38,7 +38,8 @@ def return_prediction():
 	Sample model output for testing
 	'''
 
-	print(xgb.predict(score_data.iloc[0:1]))
+	print(score_data.iloc[0:1])
+	# print(xgb.predict(score_data.iloc[0:1]))
 	print(score_data.shape)
 	return {'Hi': score_data.shape}
 
@@ -67,7 +68,9 @@ def predict(body: Value):
 	fixed_body_processed, y_test, encoder, lb = process_data(
     fixed_body_df, categorical_features=cat_features, label=None, training=False, encoder=encoder, lb=lb
 )
-	print(pd.DataFrame(fixed_body_processed))
-	#fixed_body_scores = xgb.predict(pd.DataFrame(fixed_body_processed))
+
+	fixed_body_scores = xgb.predict(fixed_body_processed)
 	
-	return {"Score": 2}
+	final_score = str(fixed_body_scores[0])
+
+	return {"Prediction is ": final_score}

@@ -79,4 +79,7 @@ for col in cat_features:
 
 pd.DataFrame(slice_based_output).to_csv('../data/slice_based_output_metrics.csv',index=False)
 
+# Model dumps
 joblib.dump(model, '../model/final_xgb.pkl')
+joblib.dump(encoder, '../model/encoder.pkl')
+joblib.dump(lb, '../model/lb.pkl')
