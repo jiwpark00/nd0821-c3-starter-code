@@ -6,11 +6,10 @@ Created: 4/19/2022
 '''
 
 from fastapi.testclient import TestClient
+from starter.main import app
 
 def test_sample():
 	pass
-
-# from starter.main import app
 
 # client = TestClient(app)
 
