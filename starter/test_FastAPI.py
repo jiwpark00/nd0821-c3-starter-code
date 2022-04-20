@@ -23,6 +23,7 @@ def test_get_home():
 
 
 def test_post_one():
+    # Tests for > $50K
     data = {
         "value": {
             "age": 31,
@@ -51,22 +52,23 @@ def test_post_one():
 
 
 def test_post_two():
-    # Another dataset - this time includes 0 as this could be a problem
+    # Another dataset
+    # Tests for <= $50K
     data = {
         "value": {
-            "age": 0,
+            "age": 21,
             "workclass": " Private",
-            "fnlgt": 0,
+            "fnlgt": 34918,
             "education": " HS-grad",
-            "education-num": 0,
-            "marital-status": " Married-civ-spouse",
-            "occupation": " Prof-specialty",
-            "relationship": " Husband",
+            "education-num": 9,
+            "marital-status": " Never-married",
+            "occupation": " Sales",
+            "relationship": " Own-child",
             "race": " White",
-            "sex": " Male",
+            "sex": " Female",
             "capital-gain": 0,
             "capital-loss": 0,
-            "hours-per-week": 0,
+            "hours-per-week": 30,
             "native-country": " United-States"
         }
     }
