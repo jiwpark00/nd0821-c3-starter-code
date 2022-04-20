@@ -3,18 +3,23 @@ This project creates XGBoost model (binary classifier) to predict whether or not
 
 # Major screenshots
 ![DVC DAG](https://github.com/jiwpark00/nd0821-c3-starter-code/blob/master/starter/screenshots/dvcdag.png)
+
 DVC DAG shows tracked model, encoder, and lb as well as clean data
 
 ![FastAPI Deployment Local](https://github.com/jiwpark00/nd0821-c3-starter-code/blob/master/starter/screenshots/example.png)
+
 FastAPI has been setup to GET and POST scores
 
 ![Continuous Integration](https://github.com/jiwpark00/nd0821-c3-starter-code/blob/master/starter/screenshots/continuous_integration.png)
+
 All changes to Github are continuously integrated via Github Actions with Data Version Control and pytest/flake8 passed.
 
 ![Heroku Deployment](https://github.com/jiwpark00/nd0821-c3-starter-code/blob/master/starter/screenshots/live_get.png)
+
 Build was successfully completed with appropriate DVC and Heroku setup.
 
 ![POST Request](https://github.com/jiwpark00/nd0821-c3-starter-code/blob/master/starter/screenshots/live_post.png)
+
 It is possible to attain response via sending a POST request. Showing here via curl.
 
 
