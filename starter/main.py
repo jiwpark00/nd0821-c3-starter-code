@@ -28,6 +28,12 @@ cat_features = [
 if '/starter' in os.getcwd():
 	os.chdir('..')
 
+if "DYNO" in os.environ and os.path.isdir(".dvc"):
+    os.system("dvc config core.no_scm true")
+    if os.system("dvc pull") != 0:
+        exit("dvc pull failed")
+    os.system("rm -r .dvc .apt/usr/lib/dvc")
+
 # Imports the model
 score_data = pd.read_csv('starter/data/first_100_test_inputs.csv')
 train_data = pd.read_csv('starter/data/train.csv')
