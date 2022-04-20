@@ -46,7 +46,6 @@ def test_post_one():
         headers={
             "Content-Type": "application/json"},
     )
-    print(response)
     assert response.status_code == 200
     assert response.text == '{"Prediction is ":"1"}'
 
