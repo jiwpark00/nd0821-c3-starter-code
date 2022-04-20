@@ -9,7 +9,7 @@ import joblib
 
 # Add the necessary imports for the starter code.
 from ml.data import process_data
-from ml.model import train_model, compute_model_metrics, inference
+from ml.model import train_model, compute_model_metrics, inference, slice_output_generator
 
 # Add code to load in the data.
 
@@ -63,19 +63,7 @@ pd.DataFrame(y_pred).to_csv('../data/y_pred_xgb.csv',index=False)
 # Total precision, recall, fbeta
 precision, recall, fbeta = compute_model_metrics(y_test, y_pred)
 
-# Model evaluation on the test dataset
-slice_based_output = [('columnName_sliceName'), ("precisionVal, recallVal, fbetaVal")]
-
-slice_based_output.append( (("Total_NoSlice"), precision, recall, fbeta) )
-
-for col in cat_features:
-	# define categories
-	col_categ = np.unique(test[col].values)
-	for categ in col_categ:
-		categ_ind = test[test[col] == categ].index
-		y_test_sub = y_test[categ_ind]
-		y_pred_sub = y_pred[categ_ind]
-		slice_based_output.append( ((col + "_" + categ), compute_model_metrics(y_test_sub, y_pred_sub)) )
+slice_based_output = slice_output_generator(slice_columns=cat_features, df=test, y_test=y_test, y_pred=y_pred)
 
 pd.DataFrame(slice_based_output).to_csv('../data/slice_output.txt',index=False)
 
