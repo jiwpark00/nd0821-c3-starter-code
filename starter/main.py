@@ -25,19 +25,20 @@ cat_features = [
 
 # Due to integration with pytest and local, if we are running on local
 # This would execute to push "up" the directory one level
-print(os.getcwd())
 if '/starter' in os.getcwd():
 	if '/app' not in os.getcwd(): 
 		os.chdir('..')
 	else: # This is updated to allow for Heroku
 		os.chdir('..')
-		print(os.getcwd())
 
 # Imports the model
 score_data = pd.read_csv('starter/data/first_100_test_inputs.csv')
 train_data = pd.read_csv('starter/data/train.csv')
- 
-xgb = joblib.load("starter/model/final_xgb.pkl")
+
+if os.getcwd() == 'app/':
+	xgb = joblib.load("model/final_xgb.pkl")
+else:
+	xgb = joblib.load("starter/model/final_xgb.pkl")
 
 @app.get("/")
 def welcome():
