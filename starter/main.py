@@ -31,11 +31,12 @@ if '/starter' in os.getcwd():
 		os.chdir('..')
 	else: # This is updated to allow for Heroku
 		os.chdir('..')
+		print(os.getcwd())
 
 # Imports the model
 score_data = pd.read_csv('starter/data/first_100_test_inputs.csv')
 train_data = pd.read_csv('starter/data/train.csv')
-
+ 
 xgb = joblib.load("starter/model/final_xgb.pkl")
 
 @app.get("/")
