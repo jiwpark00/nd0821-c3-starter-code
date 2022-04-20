@@ -56,8 +56,8 @@ score_data = pd.read_csv('starter/data/first_100_test_inputs.csv')
 train_data = pd.read_csv('starter/data/train.csv')
 
 xgb = joblib.load("starter/model/final_xgb.pkl")
-# encoder = joblib.load("starter/model/encoder.pkl")
-# lb = joblib.load("starter/model/lb.pkl")
+encoder = joblib.load("starter/model/encoder.pkl")
+lb = joblib.load("starter/model/lb.pkl")
 
 
 @app.get("/")
@@ -76,7 +76,7 @@ def return_prediction():
 	return {'Hi': score_data.shape}
 
 @app.post("/predict_dynamic")
-def predict(body: Value):
+def predict(body: Value, encoder=encoder, lb=lb):
 	body_dict = body.dict()
 
 	# Due to index issue
@@ -84,9 +84,9 @@ def predict(body: Value):
 	fixed_body_df = pd.DataFrame(fixed_body)
 
 	# This is inefficient but lets us to re-use encoder and lb
-	X_train, y_train, encoder, lb = process_data(
-    train_data, categorical_features=cat_features, label="salary", training=True
-)
+# 	X_train, y_train, encoder, lb = process_data(
+#     train_data, categorical_features=cat_features, label="salary", training=True
+# )
 
 	fixed_body_processed, y_test, encoder, lb = process_data(
     fixed_body_df, categorical_features=cat_features, label=None, training=False, encoder=encoder, lb=lb
