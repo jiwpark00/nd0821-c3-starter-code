@@ -48,14 +48,12 @@ cat_features = [
 if '/starter' in os.getcwd():
 	if '/app' not in os.getcwd(): 
 		os.chdir('..')
-	# else: # This is updated to allow for Heroku
-	# 	os.chdir('..')
+	else: # This is updated to allow for Heroku
+		os.chdir('..')
 
 # Imports the model
 score_data = pd.read_csv('starter/data/first_100_test_inputs.csv')
 train_data = pd.read_csv('starter/data/train.csv')
-
-xgb = joblib.load("starter/model/final_xgb.pkl")
 
 @app.get("/")
 def welcome():
@@ -74,7 +72,6 @@ def return_prediction():
 
 @app.post("/predict_dynamic")
 def predict(body: Value):
-	print('hi')
 	body_dict = body.dict()
 
 	# Due to index issue
@@ -85,9 +82,9 @@ def predict(body: Value):
 # 	X_train, y_train, encoder, lb = process_data(
 #     train_data, categorical_features=cat_features, label="salary", training=True
 # )
-	
-	encoder = joblib.load("starter/model/encoder.pkl")
-	lb = joblib.load("starter/model/lb.pkl")
+	# xgb = joblib.load("starter/model/final_xgb.pkl")
+	# encoder = joblib.load("starter/model/encoder.pkl")
+	# lb = joblib.load("starter/model/lb.pkl")
 
 	fixed_body_processed, y_test, encoder, lb = process_data(
     fixed_body_df, categorical_features=cat_features, label=None, training=False, encoder=encoder, lb=lb
