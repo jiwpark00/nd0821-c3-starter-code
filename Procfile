@@ -1,1 +1,1 @@
-web: sh -c 'cd starter && uvicorn main:app'
+web: sh -c 'cd starter && uvicorn main:app' --host=0.0.0.0 --port=${PORT:-5000}
