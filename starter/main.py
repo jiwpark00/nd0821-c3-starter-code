@@ -97,4 +97,4 @@ def predict(body: Value):
 	
 	final_score = str(fixed_body_scores[0])
 
-	return {"Prediction is ": 1}
+	return {"Prediction is ": final_score}

@@ -48,7 +48,7 @@ def test_post_one():
     )
     print(response)
     assert response.status_code == 200
-    # assert response.text == {"Prediction is ": 1}
+    assert response.text == '{"Prediction is ":"1"}'
 
 
 def test_post_two():
@@ -77,3 +77,4 @@ def test_post_two():
             "Content-Type": "application/json"},
     )
     assert response.status_code == 200
+    assert response.text == '{"Prediction is ":"0"}'
