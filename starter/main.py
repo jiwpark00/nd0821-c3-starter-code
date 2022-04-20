@@ -27,8 +27,9 @@ cat_features = [
 # This would execute to push "up" the directory one level
 print(os.getcwd())
 if '/starter' in os.getcwd():
-	if '/app' not in os.getcwd(): # This is updated to allow for Heroku
-		print(os.getcwd())
+	if '/app' not in os.getcwd(): 
+		os.chdir('..')
+	else: # This is updated to allow for Heroku
 		os.chdir('..')
 
 # Imports the model
