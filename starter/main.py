@@ -1,6 +1,6 @@
 # Put the code for your API here.
 from fastapi import FastAPI
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 import joblib
 import pandas as pd
 import numpy as np
@@ -16,7 +16,21 @@ if "DYNO" in os.environ and os.path.isdir(".dvc"):
 app = FastAPI()
 
 class Value(BaseModel):
-    value: dict
+    age: int = Field(..., example=45)
+    workclass: str = Field(..., example=" Private")
+    fnlgt: int = Field(..., example=12345)
+    education: str = Field(..., example=" HS-grad")
+    education_num: int = Field(alias="education-num",example=9)
+    marital_status: str = Field(alias="marital-status",example=" Married-civ-spouse")
+    occupation: str = Field(..., example=" Prof-specialty")
+    relationship: str = Field(..., example=" Husband")
+    race: str = Field(..., example=" White")
+    sex: str = Field(..., example=" Male")
+    capital_gain: int = Field(alias="capital-gain",example=1234)
+    capital_loss: int = Field(alias="capital-loss",example=567)
+    hours_per_week: int = Field(alias="hours-per-week",example=45)
+    native_country: str = Field(alias="native-country",example=" United States")
+
 
 cat_features = [
     "workclass",
@@ -42,6 +56,9 @@ score_data = pd.read_csv('starter/data/first_100_test_inputs.csv')
 train_data = pd.read_csv('starter/data/train.csv')
 
 xgb = joblib.load("starter/model/final_xgb.pkl")
+# encoder = joblib.load("starter/model/encoder.pkl")
+# lb = joblib.load("starter/model/lb.pkl")
+
 
 @app.get("/")
 def welcome():
@@ -61,18 +78,9 @@ def return_prediction():
 @app.post("/predict_dynamic")
 def predict(body: Value):
 	body_dict = body.dict()
-	body_dict_vals = body_dict['value']
-
-	body_dict_vals_fixed = {}
-
-	for k,v in body_dict_vals.items():
-		if '-' in k:
-			body_dict_vals_fixed[k.replace('-','_')] = v
-		else:
-			body_dict_vals_fixed[k] = v
 
 	# Due to index issue
-	fixed_body = {k:[v] for k,v in body_dict_vals_fixed.items()}  # WORKAROUND
+	fixed_body = {k:[v] for k,v in body_dict.items()}  # WORKAROUND
 	fixed_body_df = pd.DataFrame(fixed_body)
 
 	# This is inefficient but lets us to re-use encoder and lb
@@ -88,4 +96,4 @@ def predict(body: Value):
 	
 	final_score = str(fixed_body_scores[0])
 
-	return {"Prediction is ": final_score}
+	return {"Prediction is ": 1}

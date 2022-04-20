@@ -25,7 +25,6 @@ def test_get_home():
 def test_post_one():
     # Tests for > $50K
     data = {
-        "value": {
             "age": 31,
             "workclass": " Private",
             "fnlgt": 132996,
@@ -41,21 +40,21 @@ def test_post_one():
             "hours-per-week": 45,
             "native-country": " United-States"
         }
-    }
     response = client.post(
         "/predict_dynamic",
         data=json.dumps(data),
         headers={
             "Content-Type": "application/json"},
     )
+    print(response)
     assert response.status_code == 200
+    # assert response.text == {"Prediction is ": 1}
 
 
 def test_post_two():
     # Another dataset
     # Tests for <= $50K
     data = {
-        "value": {
             "age": 21,
             "workclass": " Private",
             "fnlgt": 34918,
@@ -71,7 +70,6 @@ def test_post_two():
             "hours-per-week": 30,
             "native-country": " United-States"
         }
-    }
     response = client.post(
         "/predict_dynamic",
         data=json.dumps(data),
