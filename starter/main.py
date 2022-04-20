@@ -70,28 +70,28 @@ def return_prediction():
 	print(score_data.shape)
 	return {'Hi': score_data.shape}
 
-@app.post("/predict_dynamic")
-def predict(body: Value):
-	body_dict = body.dict()
+# @app.post("/predict_dynamic")
+# def predict(body: Value):
+# 	body_dict = body.dict()
 
-	# Due to index issue
-	fixed_body = {k:[v] for k,v in body_dict.items()}  # WORKAROUND
-	fixed_body_df = pd.DataFrame(fixed_body)
+# 	# Due to index issue
+# 	fixed_body = {k:[v] for k,v in body_dict.items()}  # WORKAROUND
+# 	fixed_body_df = pd.DataFrame(fixed_body)
 
-	# This is inefficient but lets us to re-use encoder and lb
-# 	X_train, y_train, encoder, lb = process_data(
-#     train_data, categorical_features=cat_features, label="salary", training=True
+# 	# This is inefficient but lets us to re-use encoder and lb
+# # 	X_train, y_train, encoder, lb = process_data(
+# #     train_data, categorical_features=cat_features, label="salary", training=True
+# # )
+# 	xgb = joblib.load("starter/model/final_xgb.pkl")
+# 	encoder = joblib.load("starter/model/encoder.pkl")
+# 	lb = joblib.load("starter/model/lb.pkl")
+
+# 	fixed_body_processed, y_test, encoder, lb = process_data(
+#     fixed_body_df, categorical_features=cat_features, label=None, training=False, encoder=encoder, lb=lb
 # )
-	xgb = joblib.load("starter/model/final_xgb.pkl")
-	encoder = joblib.load("starter/model/encoder.pkl")
-	lb = joblib.load("starter/model/lb.pkl")
 
-	fixed_body_processed, y_test, encoder, lb = process_data(
-    fixed_body_df, categorical_features=cat_features, label=None, training=False, encoder=encoder, lb=lb
-)
-
-	fixed_body_scores = xgb.predict(fixed_body_processed)
+# 	fixed_body_scores = xgb.predict(fixed_body_processed)
 	
-	final_score = str(fixed_body_scores[0])
+# 	final_score = str(fixed_body_scores[0])
 
-	return {"Prediction is ": final_score}
+# 	return {"Prediction is ": final_score}
