@@ -35,7 +35,7 @@ if '/starter' in os.getcwd():
 score_data = pd.read_csv('starter/data/first_100_test_inputs.csv')
 train_data = pd.read_csv('starter/data/train.csv')
 
-if os.getcwd() == 'app/':
+if 'app' in os.getcwd():
 	xgb = joblib.load("model/final_xgb.pkl")
 else:
 	xgb = joblib.load("starter/model/final_xgb.pkl")
