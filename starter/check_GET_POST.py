@@ -1,7 +1,7 @@
 import requests
 import json
 
-response = requests.get('http://127.0.0.1:8000')
+response = requests.get('https://salary-predict-xgb.herokuapp.com/')
 
 print('Here is the GET request from the home page')
 print(response.text)
