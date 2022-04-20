@@ -14,9 +14,13 @@ FastAPI has been setup to GET and POST scores
 
 All changes to Github are continuously integrated via Github Actions with Data Version Control and pytest/flake8 passed.
 
-![Heroku Deployment](https://github.com/jiwpark00/nd0821-c3-starter-code/blob/master/starter/screenshots/live_get.png)
+![Heroku Build](https://github.com/jiwpark00/nd0821-c3-starter-code/blob/master/starter/screenshots/successful_build.png)
 
 Build was successfully completed with appropriate DVC and Heroku setup.
+
+![Heroku Deploy](https://github.com/jiwpark00/nd0821-c3-starter-code/blob/master/starter/screenshots/live_get.png)
+
+Heroku deployment after the build.
 
 ![POST Request](https://github.com/jiwpark00/nd0821-c3-starter-code/blob/master/starter/screenshots/live_post.png)
 
