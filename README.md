@@ -22,9 +22,13 @@ Build was successfully completed with appropriate DVC and Heroku setup.
 
 Heroku deployment after the build.
 
-![POST Request](https://github.com/jiwpark00/nd0821-c3-starter-code/blob/master/starter/screenshots/live_post.png)
+![GET/POST Request](https://github.com/jiwpark00/nd0821-c3-starter-code/blob/master/starter/screenshots/live_post.png)
 
-It is possible to attain response via sending a POST request. Showing here via curl.
+This file is the one used to ping Heroku for GET/POST requests.
+
+![Curl Request](https://github.com/jiwpark00/nd0821-c3-starter-code/blob/master/starter/screenshots/curl_post.png)
+
+It is also possible to attain response via sending a POST request. Showing here via curl.
 
 
 Working in a command line environment is recommended for ease of use with git and dvc. If on Windows, WSL1 or 2 is recommended.

@@ -23,7 +23,7 @@ data = {
             "native-country": " United-States"
         }
 post_response = requests.post(
-        "http://127.0.0.1:8000/predict_dynamic",
+        "https://salary-predict-xgb.herokuapp.com/predict_dynamic",
         data=json.dumps(data),
         headers={
             "Content-Type": "application/json"},
