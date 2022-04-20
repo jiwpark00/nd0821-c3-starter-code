@@ -48,8 +48,8 @@ cat_features = [
 if '/starter' in os.getcwd():
 	if '/app' not in os.getcwd(): 
 		os.chdir('..')
-	else: # This is updated to allow for Heroku
-		os.chdir('..')
+	# else: # This is updated to allow for Heroku
+	# 	os.chdir('..')
 
 # Imports the model
 score_data = pd.read_csv('starter/data/first_100_test_inputs.csv')
