@@ -7,6 +7,12 @@ import numpy as np
 import os
 from starter.ml.data import process_data
 
+if "DYNO" in os.environ and os.path.isdir(".dvc"):
+    os.system("dvc config core.no_scm true")
+    if os.system("dvc pull") != 0:
+        exit("dvc pull failed")
+    os.system("rm -r .dvc .apt/usr/lib/dvc")
+
 app = FastAPI()
 
 class Value(BaseModel):
@@ -35,10 +41,7 @@ if '/starter' in os.getcwd():
 score_data = pd.read_csv('starter/data/first_100_test_inputs.csv')
 train_data = pd.read_csv('starter/data/train.csv')
 
-if 'app' in os.getcwd():
-	xgb = joblib.load("starter/model/final_xgb.pkl.dvc")
-else:
-	xgb = joblib.load("starter/model/final_xgb.pkl")
+xgb = joblib.load("starter/model/final_xgb.pkl")
 
 @app.get("/")
 def welcome():
