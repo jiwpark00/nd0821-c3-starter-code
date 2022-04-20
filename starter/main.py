@@ -25,8 +25,10 @@ cat_features = [
 
 # Due to integration with pytest and local, if we are running on local
 # This would execute to push "up" the directory one level
+print(os.getcwd())
 if '/starter' in os.getcwd():
 	if '/app' not in os.getcwd(): # This is updated to allow for Heroku
+		print(os.getcwd())
 		os.chdir('..')
 
 # Imports the model
