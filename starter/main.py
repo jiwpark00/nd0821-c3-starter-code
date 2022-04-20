@@ -36,7 +36,7 @@ score_data = pd.read_csv('starter/data/first_100_test_inputs.csv')
 train_data = pd.read_csv('starter/data/train.csv')
 
 if 'app' in os.getcwd():
-	xgb = joblib.load("model/final_xgb.pkl")
+	xgb = joblib.load("model/final_xgb.pkl.dvc")
 else:
 	xgb = joblib.load("starter/model/final_xgb.pkl")
 
