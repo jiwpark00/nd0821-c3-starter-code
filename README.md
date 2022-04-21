@@ -22,9 +22,21 @@ Build was successfully completed with appropriate DVC and Heroku setup.
 
 Heroku deployment after the build.
 
+![Heroku Deployment Home Page](https://github.com/jiwpark00/nd0821-c3-starter-code/blob/master/starter/screenshots/home_page.png)
+
+Here, Heroku deployment at the home page
+
 ![GET/POST Request](https://github.com/jiwpark00/nd0821-c3-starter-code/blob/master/starter/screenshots/live_post.png)
 
 This file is the one used to ping Heroku for GET/POST requests.
+
+![GET/POST Result](https://github.com/jiwpark00/nd0821-c3-starter-code/blob/master/starter/screenshots/GET_POST_result.png)
+
+This is the result after pinging Heroku for GET/POST requests.
+
+![Status 200 Code](https://github.com/jiwpark00/nd0821-c3-starter-code/blob/master/starter/screenshots/Status_200_Heroku.png)
+
+This is the result of Status 200 based on Heroku Logs.
 
 ![Curl Request](https://github.com/jiwpark00/nd0821-c3-starter-code/blob/master/starter/screenshots/curl_post.png)
 
