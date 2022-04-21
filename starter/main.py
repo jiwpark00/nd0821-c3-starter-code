@@ -5,6 +5,7 @@ import joblib
 import pandas as pd
 import numpy as np
 import os
+import starter.ml.data
 
 if "DYNO" in os.environ and os.path.isdir(".dvc"):
     os.system("dvc config core.no_scm true")
