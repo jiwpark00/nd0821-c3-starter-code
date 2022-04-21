@@ -8,4 +8,3 @@ uvicorn
 gunicorn
 xgboost
 joblib
-boto3
