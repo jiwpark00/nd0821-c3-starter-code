@@ -5,7 +5,6 @@ import joblib
 import pandas as pd
 import numpy as np
 import os
-from starter.ml.data import process_data
 
 if "DYNO" in os.environ and os.path.isdir(".dvc"):
     os.system("dvc config core.no_scm true")
@@ -51,6 +50,7 @@ if '/starter' in os.getcwd():
 	else: # This is updated to allow for Heroku
 		os.chdir('..')
 
+from starter.ml.data import process_data
 # Imports the model
 score_data = pd.read_csv('starter/data/first_100_test_inputs.csv')
 train_data = pd.read_csv('starter/data/train.csv')
