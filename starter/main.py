@@ -50,7 +50,7 @@ if '/starter' in os.getcwd():
 	else: # This is updated to allow for Heroku
 		os.chdir('..')
 
-from starter.ml.data import process_data
+# from starter.ml.data import process_data
 # Imports the model
 score_data = pd.read_csv('starter/data/first_100_test_inputs.csv')
 train_data = pd.read_csv('starter/data/train.csv')
